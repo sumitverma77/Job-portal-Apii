@@ -1,7 +1,5 @@
 package com.security.job.request;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import lombok.Data;
 
 @Data
