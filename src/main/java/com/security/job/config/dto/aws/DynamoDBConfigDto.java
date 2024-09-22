@@ -1,4 +1,4 @@
-package com.security.job.config.dtp.aws;
+package com.security.job.config.dto.aws;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
