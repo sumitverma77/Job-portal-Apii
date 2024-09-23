@@ -28,7 +28,8 @@ public class DTOConverter {
     } else {
       throw new InvalidDateException("Invalid Date format: " + addJobRequest.getApplicationOpenTill());
     }
-
+    jobEntity.setLocation(addJobRequest.getLocation());
+    jobEntity.setApplicationLink(addJobRequest.getApplicationLink());
     return jobEntity;
   }
 }

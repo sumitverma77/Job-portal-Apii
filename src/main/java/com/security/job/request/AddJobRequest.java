@@ -15,5 +15,5 @@ public class AddJobRequest {
 
     private String applicationOpenTill;
     private String experience;
-    private String Location;
+    private String location;
 }

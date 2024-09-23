@@ -1,10 +1,10 @@
-package com.security.job.Resoonse;
+package com.security.job.Response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class AddJobResponse {
+public class ErrorResponse {
     private String message;
 }
