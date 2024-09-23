@@ -22,7 +22,7 @@ public class JobPostDAO extends AbstractDynamoDBDAO<JobEntity> {
 
     public void update(JobEntity entity) {
         getDynamoDBMapper()
-            .save(entity, DynamoDBMapperConfig.builder().withSaveBehavior(DynamoDBMapperConfig.SaveBehavior.UPDATE).build());
+                .save(entity, DynamoDBMapperConfig.builder().withSaveBehavior(DynamoDBMapperConfig.SaveBehavior.UPDATE).build());
     }
 
     public void save(JobEntity entity) {

@@ -13,6 +13,7 @@ public class AbstractDynamoDBDAO<T> {
     private final DynamoDBMapper dynamoDBMapper;
 
     public void save(T entity) {
+
         dynamoDBMapper.save(entity);
     }
 
