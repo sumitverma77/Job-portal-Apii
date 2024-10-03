@@ -11,10 +11,16 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBAsyncClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.security.job.config.dto.aws.DynamoDBConfigDto;
+import lombok.Data;
+import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
+@Data
 @Configuration
+@Scope("prototype")
 public class DynamoDBConfiguration {
     private final DynamoDBConfigDto config;
     public DynamoDBConfiguration(DynamoDBConfigDto config) {
@@ -22,24 +28,22 @@ public class DynamoDBConfiguration {
     }
     @Bean
     public DynamoDBMapper amazonDynamoDB() {
-        String accessKeyId = System.getenv("AMAZON_AWS_ACCESSKEY");
-        String secretAccessKey = System.getenv("AMAZON_AWS_SECRETKEY");
-        String region = System.getenv("AMZON_DYNAMODB_REGION");
-        String endpoint = System.getenv("AMAZON_DYNAMODB_URL");
         AmazonDynamoDB amazonDynamoDB = AmazonDynamoDBAsyncClientBuilder
                 .standard()
                 .withEndpointConfiguration(
-                        new AwsClientBuilder.EndpointConfiguration(endpoint,  region))
-                .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(secretAccessKey, accessKeyId)))
+                        new AwsClientBuilder.EndpointConfiguration(config.getEndpoint(),  config.getRegion()))
+                .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(config.getAccessKey(), config.getSecret())))
                 .build();
-//        ClientConfiguration clientConfiguration = new ClientConfiguration();
-//        AmazonDynamoDB amazonDynamoDB = AmazonDynamoDBClientBuilder
-//            .standard()
-//            .withRegion(Regions.fromName(config.getRegion()))
-//            .withClientConfiguration(clientConfiguration)
-//            .withCredentials(DefaultAWSCredentialsProviderChain.getInstance())
-//            .build();
-
+/*
+Can use the second method also for AWS we do not neet to pass endpoint & credentials
+ */
+    //        ClientConfiguration clientConfiguration = new ClientConfiguration();
+    //        AmazonDynamoDB amazonDynamoDB = AmazonDynamoDBClientBuilder
+    //            .standard()
+    //            .withRegion(Regions.fromName(config.getRegion()))
+    //            .withClientConfiguration(clientConfiguration)
+    //            .withCredentials(DefaultAWSCredentialsProviderChain.getInstance())
+    //            .build();
         return new DynamoDBMapper(amazonDynamoDB);
     }
 }

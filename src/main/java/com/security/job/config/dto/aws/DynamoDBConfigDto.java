@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Scope;
 @Scope("prototype")
 @ConfigurationProperties(prefix = "aws.dynamodb")
 public class DynamoDBConfigDto {
-    private String accessKey;
-    private String secret;
-    private String region;
+        private String accessKey;
+        private String secret;
+        private String region;
+        private String endpoint;
 }

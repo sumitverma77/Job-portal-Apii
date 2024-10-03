@@ -18,14 +18,13 @@ public class JobController {
     JobService jobService;
 
     @PostMapping("/post")
-    public ResponseEntity<AddJobResponse> add(@RequestBody AddJobRequest addRequest) {
+        public ResponseEntity<AddJobResponse> add(@RequestBody AddJobRequest addRequest) {
         return jobService.saveJob(addRequest);
     }
 
     @GetMapping("/get")
     public ResponseEntity<List<JobEntity>> get(@RequestBody GetJobRequest getJobRequest) {
         System.out.println(getJobRequest.getJobsAvailableDate());
-       // return null;
         return jobService.getJobs(getJobRequest);
     }
 }
