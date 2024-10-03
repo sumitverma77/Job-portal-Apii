@@ -7,6 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Component
 public class JobPostDAO extends AbstractDynamoDBDAO<JobEntity> {
@@ -18,6 +21,12 @@ public class JobPostDAO extends AbstractDynamoDBDAO<JobEntity> {
 
     public JobEntity getJobPost(String id) {
         return getDynamoDBMapper().load(JobEntity.class, id);
+    }
+    public List<JobEntity> getAvailableJobs(long DateInSecond) {
+        List<JobEntity> allItems = getAll(JobEntity.class);
+        return allItems.stream()
+                .filter(item -> item.getApplicationOpenTill() >= DateInSecond)
+                .collect(Collectors.toList());
     }
 
     public void update(JobEntity entity) {

@@ -11,9 +11,9 @@ public class AddJobRequest {
 
     private String applicationLink;
 
-    private String dateOfRelease;
+    private String  dateOfRelease;
 
     private String applicationOpenTill;
-
     private String experience;
+    private String location;
 }
